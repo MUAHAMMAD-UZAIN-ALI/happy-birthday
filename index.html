@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday BBG 🩷 — A Special Surprise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday BBG 🩷 — A Special Interactive Surprise</title>
 
-  <!-- Google Fonts for Typography Matching the Scrapbook Aesthetic -->
+  <!-- Google Fonts for Scrapbook Coquette Aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,500;0,700;0,800;1,400&family=Quicksand:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,500;0,700;0,800;1,500&family=Quicksand:wght@500;600;700&display=swap"
     rel="stylesheet"
   />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Canvas Confetti for Celebration Burst -->
+  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -25,14 +25,12 @@
        ========================================================================== */
     :root {
       --cream-bg: #fbf8f5;
-      --grid-line: rgba(139, 38, 62, 0.08);
+      --grid-line: rgba(130, 34, 55, 0.085);
       --maroon: #7d2336;
-      --maroon-dark: #5e1827;
-      --berry-bg: #9e324b;
+      --maroon-dark: #5c1625;
+      --berry-bg: #9c3049;
       --pink-soft: #f3a6b8;
-      --pink-bright: #e87a96;
       --pink-envelope: #f4b6c4;
-      --pink-envelope-flap: #eba1b2;
     }
 
     * {
@@ -58,12 +56,12 @@
       background-image:
         linear-gradient(to right, var(--grid-line) 1.5px, transparent 1.5px),
         linear-gradient(to bottom, var(--grid-line) 1.5px, transparent 1.5px);
-      background-size: 36px 36px;
+      background-size: 34px 34px;
     }
 
-    /* Berry Gallery Background (Screen 7) */
+    /* Berry Gallery Background (Polaroid Screen) */
     .berry-theme {
-      background: radial-gradient(circle at center, #b03a55 0%, #8f2840 100%);
+      background: radial-gradient(circle at center, #b23a56 0%, #89243b 100%);
     }
 
     /* Typography Helpers */
@@ -89,7 +87,7 @@
       filter:
         drop-shadow(0px 0px 2px #ffffff)
         drop-shadow(0px 0px 3px #ffffff)
-        drop-shadow(0px 6px 12px rgba(94, 24, 39, 0.18));
+        drop-shadow(0px 7px 14px rgba(92, 22, 37, 0.2));
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -99,7 +97,7 @@
 
     /* Maroon Pill Buttons */
     .btn-maroon {
-      background: linear-gradient(145deg, #8b263e, #6e1c2e);
+      background: linear-gradient(145deg, #8e2740, #6d1b2d);
       color: #fff8f9;
       border: 2.5px solid #ffffff;
       box-shadow: 0 6px 16px rgba(125, 35, 54, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
@@ -110,7 +108,7 @@
     .btn-maroon:hover {
       transform: translateY(-3px) scale(1.04);
       box-shadow: 0 10px 22px rgba(125, 35, 54, 0.38);
-      background: linear-gradient(145deg, #9c2b46, #7d2336);
+      background: linear-gradient(145deg, #a12d49, #7d2336);
     }
 
     .btn-maroon:active {
@@ -127,12 +125,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 1.25rem;
       opacity: 0;
       pointer-events: none;
       transform: scale(0.96) translateY(10px);
-      transition: opacity 0.48s ease, transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 10;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .screen.active {
@@ -169,6 +169,18 @@
       75% { transform: scale(1.05) rotate(-1deg); }
     }
 
+    @keyframes flameFlicker {
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+      25% { transform: scale(1.08, 0.94) rotate(3deg); opacity: 0.92; }
+      50% { transform: scale(0.95, 1.07) rotate(-3deg); opacity: 1; }
+      75% { transform: scale(1.04, 0.96) rotate(2deg); opacity: 0.95; }
+    }
+
+    @keyframes smokeRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0.85; }
+      100% { transform: translateY(-38px) scale(1.5); opacity: 0; }
+    }
+
     @keyframes swayPolaroid1 {
       0%, 100% { transform: rotate(-5deg); }
       50% { transform: rotate(-2deg); }
@@ -186,34 +198,47 @@
 
     @keyframes hugSqueezeLeft {
       0%, 100% { transform: translateX(0) rotate(0deg); }
-      50% { transform: translateX(6px) rotate(3deg); }
+      50% { transform: translateX(7px) rotate(3deg); }
     }
 
     @keyframes hugSqueezeRight {
       0%, 100% { transform: translateX(0) rotate(0deg); }
-      50% { transform: translateX(-6px) rotate(-3deg); }
+      50% { transform: translateX(-7px) rotate(-3deg); }
     }
 
     @keyframes heartFloatUp {
       0% { transform: translateY(0) scale(0.7); opacity: 0; }
       30% { opacity: 1; }
-      100% { transform: translateY(-45px) scale(1.15); opacity: 0; }
+      100% { transform: translateY(-48px) scale(1.15); opacity: 0; }
+    }
+
+    @keyframes showerRise {
+      0% { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-85vh) scale(1.35) rotate(25deg); opacity: 0; }
     }
 
     .anim-float { animation: floatSlow 3.5s ease-in-out infinite; }
     .anim-happy { animation: bounceHappy 2.2s ease-in-out infinite; }
     .anim-angry { animation: wiggleAngry 1.4s ease-in-out infinite; }
     .anim-gift { animation: pulseGift 2.4s ease-in-out infinite; }
+    .candle-flame {
+      transform-origin: center bottom;
+      animation: flameFlicker 0.6s ease-in-out infinite;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .smoke-puff {
+      animation: smokeRise 1.3s ease-out forwards;
+    }
     .polaroid-1 { animation: swayPolaroid1 4s ease-in-out infinite; transform-origin: top center; }
     .polaroid-2 { animation: swayPolaroid2 4.5s ease-in-out infinite; transform-origin: top center; }
     .polaroid-3 { animation: swayPolaroid3 3.8s ease-in-out infinite; transform-origin: top center; }
-    .hug-left { animation: hugSqueezeLeft 1.8s ease-in-out infinite; }
-    .hug-right { animation: hugSqueezeRight 1.8s ease-in-out infinite; }
+    .hug-left { animation: hugSqueezeLeft 1.7s ease-in-out infinite; }
+    .hug-right { animation: hugSqueezeRight 1.7s ease-in-out infinite; }
     .heart-float-1 { animation: heartFloatUp 2.4s ease-out infinite; }
     .heart-float-2 { animation: heartFloatUp 2.4s ease-out 0.8s infinite; }
     .heart-float-3 { animation: heartFloatUp 2.4s ease-out 1.6s infinite; }
 
-    /* Lined Paper Card inside Love Letter (Screen 6) */
+    /* Lined Paper Card inside Love Letter */
     .lined-paper {
       background-color: #fffdfb;
       background-image: repeating-linear-gradient(
@@ -228,7 +253,7 @@
     /* Polaroid Frame Styling */
     .polaroid-card {
       background: #ffffff;
-      padding: 10px 10px 28px 10px;
+      padding: 8px 8px 24px 8px;
       box-shadow: 0 12px 26px rgba(45, 8, 17, 0.35);
       border-radius: 4px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -240,7 +265,20 @@
       box-shadow: 0 18px 34px rgba(45, 8, 17, 0.48);
     }
 
-    /* Decorative Corner Waves (Persistent across cream screens) */
+    /* Love Coupon Card Flip */
+    .coupon-card {
+      background: linear-gradient(135deg, #fff9fb 0%, #ffe6ed 100%);
+      border: 2px dashed #c94b6b;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .coupon-card.revealed {
+      background: linear-gradient(135deg, #8e2740 0%, #6d1b2d 100%);
+      color: #ffffff;
+      border: 2px solid #ffd6e0;
+      transform: scale(1.03);
+    }
+
+    /* Decorative Corner Waves */
     .corner-waves {
       position: fixed;
       inset: 0;
@@ -249,22 +287,23 @@
       transition: opacity 0.4s ease;
     }
 
-    /* Custom Toast Notification (Never use alert()) */
+    /* Custom Toast Notification */
     #toast-msg {
       position: fixed;
-      top: 18px;
+      top: 56px;
       left: 50%;
-      transform: translateX(-50%) translateY(-80px);
+      transform: translateX(-50%) translateY(-100px);
       background: #7d2336;
       color: #fff;
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
       z-index: 100;
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       border: 2px solid #f3a6b8;
+      white-space: nowrap;
     }
 
     #toast-msg.show {
@@ -274,44 +313,114 @@
 </head>
 <body class="graph-paper">
 
-  <!-- Hidden File Input for Custom Photo Uploads (Heart Frames & Polaroids) -->
+  <!-- Hidden File Input for Custom Photo Uploads -->
   <input type="file" id="photo-uploader" accept="image/*" class="hidden" />
 
   <!-- Toast Feedback Banner -->
-  <div id="toast-msg">Photo updated! 🩷</div>
+  <div id="toast-msg">Saved! 🩷</div>
+
+  <!-- Floating Particle Container for Hugs/Kisses/Flowers Shower -->
+  <div id="shower-layer" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
   <!-- ========================================================================
        ORGANIC MAROON CORNER WAVES (Matches Video Framing)
        ======================================================================== -->
   <div id="corner-waves" class="corner-waves">
     <!-- Left Organic Maroon Wave -->
-    <svg class="absolute top-0 left-0 h-full w-20 sm:w-36 md:w-48 lg:w-60" viewBox="0 0 200 800" preserveAspectRatio="none">
+    <svg class="absolute top-0 left-0 h-full w-16 sm:w-32 md:w-44 lg:w-56" viewBox="0 0 200 800" preserveAspectRatio="none">
       <path d="M0,0 L120,0 C175,140 45,270 115,420 C175,550 55,680 130,800 L0,800 Z" fill="#822237" />
       <path d="M0,0 L105,0 C158,140 32,270 102,420 C162,550 42,680 115,800 L0,800 Z" fill="#731d30" opacity="0.55" />
     </svg>
 
     <!-- Right Organic Maroon Wave -->
-    <svg class="absolute top-0 right-0 h-full w-20 sm:w-36 md:w-48 lg:w-60" viewBox="0 0 200 800" preserveAspectRatio="none">
+    <svg class="absolute top-0 right-0 h-full w-16 sm:w-32 md:w-44 lg:w-56" viewBox="0 0 200 800" preserveAspectRatio="none">
       <path d="M200,0 L85,0 C25,150 155,280 80,430 C20,555 140,675 70,800 L200,800 Z" fill="#822237" />
       <path d="M200,0 L100,0 C40,150 170,280 95,430 C35,555 155,675 85,800 L200,800 Z" fill="#731d30" opacity="0.55" />
     </svg>
   </div>
 
-  <!-- Subtle Sound Toggle & Progress Indicator (Top Center) -->
-  <div class="fixed top-3 right-3 sm:top-4 sm:right-5 z-40 flex items-center gap-2">
+  <!-- ========================================================================
+       TOP UTILITY BAR (Customize/Reset Photos & Music Box Lullaby Toggle)
+       ======================================================================== -->
+  <div class="fixed top-3 left-3 right-3 sm:top-4 sm:left-5 sm:right-5 z-40 flex items-center justify-between pointer-events-none">
+    <!-- Left: Customize / Reset Saved Photos Pill -->
     <button
-      id="sound-toggle"
-      onclick="toggleChime()"
-      title="Toggle Cute Sound Effects"
-      class="bg-white/85 backdrop-blur-sm border border-[#7d2336]/20 text-[#7d2336] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-white transition flex items-center gap-1.5"
+      onclick="openCustomizeModal()"
+      title="Customize Photos & Message"
+      class="pointer-events-auto bg-white/90 backdrop-blur-sm border border-[#7d2336]/25 text-[#7d2336] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-white transition flex items-center gap-1.5 cursor-pointer"
     >
-      <span id="sound-icon">🔊</span>
-      <span class="hidden sm:inline" id="sound-label">Sound On</span>
+      <span>✨</span>
+      <span>Customize Photos</span>
+    </button>
+
+    <!-- Right: Music Box Lullaby Toggle -->
+    <button
+      id="music-toggle"
+      onclick="toggleMusicBox()"
+      title="Toggle Birthday Music Box Lullaby"
+      class="pointer-events-auto bg-white/90 backdrop-blur-sm border border-[#7d2336]/25 text-[#7d2336] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-white transition flex items-center gap-1.5 cursor-pointer"
+    >
+      <span id="music-icon">🎵</span>
+      <span id="music-label">Music Box: Off</span>
     </button>
   </div>
 
   <!-- ========================================================================
-       SCREEN 1: LANDING ("HEY!! I made something for you")
+       CUSTOMIZE MODAL (Easy System Filename / Link Setup)
+       ======================================================================== -->
+  <div id="customize-modal" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#fffdfb] border-2 border-[#7d2336] rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl text-center relative my-auto">
+      <button onclick="closeCustomizeModal()" class="absolute top-3 right-4 text-[#7d2336] text-xl font-bold cursor-pointer">✕</button>
+      <h3 class="font-impact text-2xl text-[#7d2336] tracking-wide mb-1">ADD YOUR SYSTEM PHOTOS 🩷</h3>
+      <p class="text-xs text-[#5c1625]/80 mb-3">Type your local system filenames (e.g., <code class="bg-pink-100 px-1 py-0.5 rounded">heart-photo-1.jpeg</code>) or click frames directly!</p>
+
+      <label class="block text-left text-xs font-bold text-[#7d2336] mb-1">Love Letter Note:</label>
+      <textarea
+        id="custom-letter-input"
+        rows="2"
+        class="w-full border border-[#7d2336]/30 rounded-xl p-2 text-xs text-[#3d1d24] focus:outline-none focus:border-[#7d2336] mb-3"
+      ></textarea>
+
+      <!-- System Filename Inputs for All 5 Photos -->
+      <div class="text-left space-y-2 mb-4 max-h-48 overflow-y-auto pr-1">
+        <div>
+          <label class="text-[11px] font-semibold text-[#5c1625]">1. Heart Frame Left (Screen 6):</label>
+          <input id="sys-heart-img-1" type="text" placeholder="heart-photo-1.jpeg" class="w-full border border-[#7d2336]/30 rounded-lg px-2.5 py-1.5 text-xs text-[#3d1d24]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-[#5c1625]">2. Heart Frame Right (Screen 6):</label>
+          <input id="sys-heart-img-2" type="text" placeholder="heart-photo-2.jpeg" class="w-full border border-[#7d2336]/30 rounded-lg px-2.5 py-1.5 text-xs text-[#3d1d24]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-[#5c1625]">3. Polaroid Left (Screen 7):</label>
+          <input id="sys-polaroid-img-1" type="text" placeholder="polaroid-1.jpg" class="w-full border border-[#7d2336]/30 rounded-lg px-2.5 py-1.5 text-xs text-[#3d1d24]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-[#5c1625]">4. Polaroid Center (Screen 7):</label>
+          <input id="sys-polaroid-img-2" type="text" placeholder="polaroid-2.jpg" class="w-full border border-[#7d2336]/30 rounded-lg px-2.5 py-1.5 text-xs text-[#3d1d24]" />
+        </div>
+        <div>
+          <label class="text-[11px] font-semibold text-[#5c1625]">5. Polaroid Right (Screen 7):</label>
+          <input id="sys-polaroid-img-3" type="text" placeholder="polaroid-3.jpg" class="w-full border border-[#7d2336]/30 rounded-lg px-2.5 py-1.5 text-xs text-[#3d1d24]" />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2.5">
+        <button onclick="saveSystemFilenames()" class="btn-maroon text-xs font-bold px-5 py-2.5 rounded-full">
+          Save Photos 💾
+        </button>
+        <button
+          onclick="resetAllSavedPhotos()"
+          class="bg-pink-100 hover:bg-pink-200 text-[#7d2336] border border-[#7d2336]/30 text-xs font-bold px-4 py-2.5 rounded-full transition cursor-pointer"
+        >
+          Reset 🔄
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SCREEN 1: LANDING ("HEY!! I made something for you") + RUNAWAY "NO" BUTTON
        ======================================================================== -->
   <section id="screen-1" class="screen active">
     <div class="relative max-w-xl w-full flex flex-col items-center text-center px-4">
@@ -319,33 +428,26 @@
       <!-- Top Row: HEY!! + Peeking Cute White Cat Sticker -->
       <div class="relative flex items-center justify-center mb-1">
         <h1 class="font-impact text-5xl sm:text-7xl md:text-8xl text-[#7d2336] tracking-wide drop-shadow-sm">
-          HEY! SWWEEEETIEE
+          HEY!!
         </h1>
 
         <!-- Cute Peeking White Cat Sticker -->
         <div class="sticker anim-float -ml-2 sm:ml-2 -mt-6 sm:-mt-10 w-24 h-24 sm:w-32 sm:h-32">
           <svg viewBox="0 0 160 160" class="w-full h-full">
-            <!-- White Sticker Backing -->
             <path d="M35,55 L26,20 L58,38 Q80,32 102,38 L134,20 L125,55 Q142,75 136,105 Q130,132 80,135 Q30,132 24,105 Q18,75 35,55 Z" fill="#ffffff" stroke="#ffffff" stroke-width="10" stroke-linejoin="round"/>
-            <!-- Cat Head & Ears -->
             <path d="M38,56 L30,24 L60,41 Q80,36 100,41 L130,24 L122,56 Q137,75 132,102 Q126,128 80,130 Q34,128 28,102 Q23,75 38,56 Z" fill="#f7f4f2" stroke="#d8cfc9" stroke-width="2"/>
-            <!-- Inner Pink Ears -->
             <polygon points="36,50 34,31 53,42" fill="#f5b3c4"/>
             <polygon points="124,50 126,31 107,42" fill="#f5b3c4"/>
-            <!-- Big Cute Eyes -->
             <ellipse cx="60" cy="78" rx="9" ry="10" fill="#2b1b1e"/>
             <circle cx="57" cy="74" r="3.2" fill="#ffffff"/>
             <circle cx="62" cy="81" r="1.5" fill="#ffffff"/>
             <ellipse cx="100" cy="78" rx="9" ry="10" fill="#2b1b1e"/>
             <circle cx="97" cy="74" r="3.2" fill="#ffffff"/>
             <circle cx="102" cy="81" r="1.5" fill="#ffffff"/>
-            <!-- Rosy Cheeks -->
             <ellipse cx="45" cy="91" rx="8" ry="4.5" fill="#f7a8b8" opacity="0.75"/>
             <ellipse cx="115" cy="91" rx="8" ry="4.5" fill="#f7a8b8" opacity="0.75"/>
-            <!-- Cute Nose & Smile -->
             <polygon points="76,88 84,88 80,93" fill="#e87a96"/>
             <path d="M71,95 Q76,101 80,95 Q84,101 89,95" fill="none" stroke="#5c3a3e" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- Little Paws -->
             <ellipse cx="56" cy="128" rx="11" ry="8" fill="#ffffff" stroke="#d8cfc9" stroke-width="2"/>
             <ellipse cx="104" cy="128" rx="11" ry="8" fill="#ffffff" stroke="#d8cfc9" stroke-width="2"/>
           </svg>
@@ -362,21 +464,24 @@
         Do you want to see?
       </p>
 
-      <!-- Yes / No Maroon Pill Buttons -->
-      <div class="flex items-center justify-center gap-5 sm:gap-8">
+      <!-- Yes / Playful Runaway No Maroon Pill Buttons -->
+      <div class="relative flex items-center justify-center gap-5 sm:gap-8 min-h-[70px] w-full">
         <button
-          onclick="goToScreen(3)"
-          class="btn-maroon font-handwriting text-2xl sm:text-3xl px-9 sm:px-12 py-2.5 sm:py-3 rounded-full"
+          onclick="handleYesStart()"
+          class="btn-maroon font-handwriting text-2xl sm:text-3xl px-9 sm:px-12 py-2.5 sm:py-3 rounded-full z-20"
         >
           Yes
         </button>
         <button
-          onclick="goToScreen(2)"
-          class="btn-maroon font-handwriting text-2xl sm:text-3xl px-9 sm:px-12 py-2.5 sm:py-3 rounded-full"
+          id="no-btn"
+          onmouseenter="dodgeNoButton()"
+          onclick="handleNoClick()"
+          class="btn-maroon font-handwriting text-2xl sm:text-3xl px-9 sm:px-12 py-2.5 sm:py-3 rounded-full transition-transform duration-200 z-20"
         >
           No
         </button>
       </div>
+      <p id="no-hint" class="text-xs font-semibold text-[#7d2336]/75 mt-2 h-4"></p>
     </div>
   </section>
 
@@ -385,30 +490,20 @@
        ======================================================================== -->
   <section id="screen-2" class="screen">
     <div class="max-w-lg w-full flex flex-col items-center text-center px-4">
-      
-      <!-- Angry Cute Ginger Cat Sticker with Pink Flower on Head -->
       <div class="sticker anim-angry w-36 h-36 sm:w-44 sm:h-44 mb-3">
         <svg viewBox="0 0 180 180" class="w-full h-full">
-          <!-- Sticker White Outline -->
           <path d="M45,65 L35,28 L68,46 Q90,40 112,46 L145,28 L135,65 Q152,88 145,118 Q138,148 90,150 Q42,148 35,118 Q28,88 45,65 Z" fill="#ffffff" stroke="#ffffff" stroke-width="11" stroke-linejoin="round"/>
-          <!-- Ginger Cat Fur -->
           <path d="M47,66 L38,32 L70,48 Q90,43 110,48 L142,32 L133,66 Q148,88 141,116 Q135,144 90,146 Q45,144 39,116 Q32,88 47,66 Z" fill="#c98e5b" stroke="#9e6738" stroke-width="2"/>
-          <!-- Cream Muzzle Patch -->
           <ellipse cx="90" cy="112" rx="34" ry="26" fill="#f7eadc"/>
-          <!-- Tabby Stripes -->
           <path d="M84,48 L84,60 M90,46 L90,62 M96,48 L96,60" stroke="#8a5328" stroke-width="3" stroke-linecap="round"/>
-          <!-- Grumpy Furrowed Eyebrows & Glaring Eyes -->
           <ellipse cx="67" cy="92" rx="10" ry="9" fill="#3a2314"/>
           <circle cx="64" cy="89" r="2.5" fill="#fff"/>
           <ellipse cx="113" cy="92" rx="10" ry="9" fill="#3a2314"/>
           <circle cx="110" cy="89" r="2.5" fill="#fff"/>
-          <!-- Angry V-Brows -->
           <path d="M53,79 L78,88" stroke="#5e3214" stroke-width="4.5" stroke-linecap="round"/>
           <path d="M127,79 L102,88" stroke="#5e3214" stroke-width="4.5" stroke-linecap="round"/>
-          <!-- Grumpy Frown -->
           <polygon points="86,103 94,103 90,108" fill="#d97282"/>
           <path d="M78,118 Q90,109 102,118" fill="none" stroke="#5e3214" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Cute Pink Hibiscus Flower on Ear -->
           <g transform="translate(124, 44)">
             <circle cx="0" cy="-11" r="9" fill="#f497b2"/>
             <circle cx="10" cy="-3" r="9" fill="#f7adc3"/>
@@ -420,12 +515,10 @@
         </svg>
       </div>
 
-      <!-- Bold Maroon Header -->
       <h2 class="font-impact text-4xl sm:text-6xl text-[#7d2336] tracking-wide mb-6">
         HOW DARE YOU
       </h2>
 
-      <!-- Go Back Pill Button -->
       <button
         onclick="goToScreen(1)"
         class="btn-maroon font-handwriting text-2xl sm:text-3xl px-10 py-2.5 rounded-full"
@@ -440,47 +533,36 @@
        ======================================================================== -->
   <section id="screen-3" class="screen">
     <div class="max-w-lg w-full flex flex-col items-center text-center px-4">
-      
-      <!-- Happy Cute White Cat with Pink Bow Sticker -->
       <div class="sticker anim-happy w-36 h-36 sm:w-44 sm:h-44 mb-2">
         <svg viewBox="0 0 180 180" class="w-full h-full">
-          <!-- Sticker Outline -->
           <path d="M44,64 L34,26 L68,45 Q90,39 112,45 L146,26 L136,64 Q152,86 146,116 Q138,146 90,148 Q42,146 34,116 Q28,86 44,64 Z" fill="#ffffff" stroke="#ffffff" stroke-width="11" stroke-linejoin="round"/>
-          <!-- White Cat Body/Head -->
           <path d="M46,65 L37,30 L69,47 Q90,42 111,47 L143,30 L134,65 Q149,86 143,114 Q136,142 90,144 Q44,142 37,114 Q31,86 46,65 Z" fill="#faf7f5" stroke="#dfd6d1" stroke-width="2"/>
-          <!-- Pink Inner Ears -->
           <polygon points="44,58 41,37 62,48" fill="#f6b4c6"/>
           <polygon points="136,58 139,37 118,48" fill="#f6b4c6"/>
-          <!-- Sparkling Happy Eyes -->
           <ellipse cx="67" cy="88" rx="10" ry="11" fill="#2b1b1e"/>
           <circle cx="64" cy="84" r="3.8" fill="#ffffff"/>
           <circle cx="70" cy="92" r="1.8" fill="#ffffff"/>
           <ellipse cx="113" cy="88" rx="10" ry="11" fill="#2b1b1e"/>
           <circle cx="110" cy="84" r="3.8" fill="#ffffff"/>
           <circle cx="116" cy="92" r="1.8" fill="#ffffff"/>
-          <!-- Blush & Happy Cat Mouth -->
           <ellipse cx="50" cy="102" rx="9" ry="5" fill="#f79eb3" opacity="0.8"/>
           <ellipse cx="130" cy="102" rx="9" ry="5" fill="#f79eb3" opacity="0.8"/>
           <polygon points="86,99 94,99 90,104" fill="#e87a96"/>
           <path d="M80,106 Q85,113 90,106 Q95,113 100,106" fill="none" stroke="#5c3a3e" stroke-width="2.4" stroke-linecap="round"/>
-          <!-- Cute Coquette Pink Bow on Right Ear -->
           <g transform="translate(128, 42) rotate(18)">
             <path d="M0,0 L-16,-11 Q-21,0 -16,11 Z" fill="#f285a2" stroke="#d45d7d" stroke-width="1.5"/>
             <path d="M0,0 L16,-11 Q21,0 16,11 Z" fill="#f285a2" stroke="#d45d7d" stroke-width="1.5"/>
             <circle cx="0" cy="0" r="5" fill="#ffacc2" stroke="#d45d7d" stroke-width="1.5"/>
           </g>
-          <!-- Little Sparkles -->
           <path d="M22,52 L25,60 L33,63 L25,66 L22,74 L19,66 L11,63 L19,60 Z" fill="#f285a2"/>
           <path d="M156,74 L158,79 L163,81 L158,83 L156,88 L154,83 L149,81 L154,79 Z" fill="#f285a2"/>
         </svg>
       </div>
 
-      <!-- Cursive Compliment -->
       <p class="font-script text-4xl sm:text-5xl md:text-6xl text-[#2d1419] mb-6">
         That's a good Gurlll <span class="text-3xl sm:text-4xl">💋</span>
       </p>
 
-      <!-- Click Pill Button -->
       <button
         onclick="goToScreen(4)"
         class="btn-maroon font-handwriting text-2xl sm:text-3xl px-12 py-2.5 rounded-full"
@@ -495,55 +577,40 @@
        ======================================================================== -->
   <section id="screen-4" class="screen">
     <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-4">
-      
-      <!-- Cute Cat with Party Hat & Birthday Cake Sticker -->
       <div class="sticker anim-float w-36 h-40 sm:w-44 sm:h-48 mb-2">
         <svg viewBox="0 0 180 200" class="w-full h-full">
-          <!-- Sticker White Backing -->
           <path d="M90,12 L108,48 Q132,56 138,84 Q146,112 135,142 Q128,175 90,178 Q52,175 45,142 Q34,112 42,84 Q48,56 72,48 Z" fill="#ffffff" stroke="#ffffff" stroke-width="11" stroke-linejoin="round"/>
-          <!-- Party Hat -->
           <polygon points="90,16 70,54 110,54" fill="#f497b2" stroke="#d45d7d" stroke-width="2"/>
           <line x1="78" y1="40" x2="102" y2="40" stroke="#ffffff" stroke-width="3"/>
           <circle cx="90" cy="14" r="6" fill="#ffd166"/>
-          <!-- Cat Head & Body -->
           <ellipse cx="90" cy="88" rx="42" ry="36" fill="#f7f4f2" stroke="#d6ccc6" stroke-width="2"/>
-          <!-- Grey/Black Patch over Left Ear -->
           <path d="M52,68 L48,44 L72,56 Q60,64 52,78 Z" fill="#4a4446"/>
           <polygon points="128,68 132,44 108,56" fill="#f7f4f2" stroke="#d6ccc6" stroke-width="2"/>
-          <!-- Cute Eyes -->
           <circle cx="74" cy="86" r="7" fill="#23181a"/>
           <circle cx="72" cy="84" r="2.3" fill="#fff"/>
           <circle cx="106" cy="86" r="7" fill="#23181a"/>
           <circle cx="104" cy="84" r="2.3" fill="#fff"/>
-          <!-- Nose & Smile -->
           <polygon points="87,94 93,94 90,98" fill="#e87a96"/>
           <path d="M83,101 Q90,107 97,101" fill="none" stroke="#4a3538" stroke-width="2" stroke-linecap="round"/>
-          <!-- Birthday Cake Held in Paws -->
           <rect x="64" y="128" width="52" height="32" rx="6" fill="#fce4ec" stroke="#d45d7d" stroke-width="2"/>
           <path d="M64,136 Q73,144 82,136 Q90,144 98,136 Q107,144 116,136 L116,128 L64,128 Z" fill="#f48fb1"/>
-          <!-- Candle -->
           <rect x="87" y="112" width="6" height="16" rx="2" fill="#ffd166"/>
           <path d="M90,101 Q95,107 90,112 Q85,107 90,101 Z" fill="#ff7043"/>
-          <!-- Paws Holding Cake -->
           <ellipse cx="62" cy="142" rx="9" ry="7" fill="#ffffff" stroke="#d6ccc6" stroke-width="2"/>
           <ellipse cx="118" cy="142" rx="9" ry="7" fill="#ffffff" stroke="#d6ccc6" stroke-width="2"/>
         </svg>
       </div>
 
-      <!-- Bold Header -->
       <h1 class="font-impact text-3xl sm:text-5xl md:text-6xl text-[#7d2336] tracking-wide mb-3">
-        HAPPY BIRTHDAY HUNGRYYY BIRD  <span class="text-2xl sm:text-4xl">🩷</span>
+        HAPPY BIRTHDAY BBG <span class="text-2xl sm:text-4xl">🩷</span>
       </h1>
 
-      <!-- Uppercase Typewriter Subtext -->
       <p id="bday-typewriter" class="font-clean font-bold text-xs sm:text-sm md:text-base text-[#3b1d23] tracking-wider uppercase max-w-md leading-relaxed min-h-[3.2rem]">
         YOU ARE MY FAVORITE NOTIFICATION ❤️<br />
         STAY CUTE. STAY HAPPY. STAY MINE.
       </p>
 
-      <!-- Bottom-Right "Next" Pill Button with Hand-Drawn Line Doodles -->
       <div class="mt-8 sm:mt-10 self-end sm:mr-8 flex items-center gap-2">
-        <!-- Hand-drawn Sparkle Lines -->
         <svg class="w-8 h-8 text-[#7d2336] opacity-75" viewBox="0 0 40 40">
           <path d="M32,10 L18,16 M34,20 L16,22 M30,30 L18,27" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
@@ -562,60 +629,43 @@
        ======================================================================== -->
   <section id="screen-5" class="screen">
     <div class="relative max-w-xl w-full flex flex-col items-center text-center px-4">
-      
-      <!-- Interactive Pink Envelope with Satin Maroon Ribbon -->
       <div
-        onclick="openEnvelopeTransition()"
+        onclick="goToScreen(6)"
         class="group cursor-pointer relative w-64 h-44 sm:w-80 sm:h-52 transition-transform duration-300 hover:scale-105 active:scale-95"
       >
         <svg viewBox="0 0 320 210" class="w-full h-full drop-shadow-xl">
-          <!-- Envelope Base -->
           <rect x="10" y="10" width="300" height="190" rx="14" fill="#f3b6c4" stroke="#df96a8" stroke-width="2"/>
-          <!-- Side Flaps -->
           <polygon points="10,14 145,105 10,196" fill="#eeabb9"/>
           <polygon points="310,14 175,105 310,196" fill="#eeabb9"/>
-          <!-- Bottom Flap -->
           <polygon points="10,198 160,98 310,198" fill="#f6c3cf" stroke="#e29baa" stroke-width="1.5"/>
-          <!-- Top Flap -->
           <polygon points="10,12 160,118 310,12" fill="#eb9fb1" stroke="#d9899c" stroke-width="1.5"/>
-
-          <!-- Satin Maroon Vertical & Horizontal Ribbon -->
           <rect x="148" y="10" width="24" height="190" fill="#8b263e" opacity="0.9"/>
           <rect x="10" y="96" width="300" height="22" fill="#8b263e" opacity="0.9"/>
-
-          <!-- Satin Ribbon Bow in Center -->
           <g transform="translate(160, 107)">
-            <!-- Bow Tails -->
             <path d="M-6,6 L-36,48 L-22,52 L-2,10 Z" fill="#751d32"/>
             <path d="M6,6 L36,48 L22,52 L2,10 Z" fill="#751d32"/>
-            <!-- Bow Loops -->
             <path d="M0,0 C-38,-32 -54,12 -6,8 Z" fill="#9e2d48" stroke="#68172a" stroke-width="1.5"/>
             <path d="M0,0 C38,-32 54,12 6,8 Z" fill="#9e2d48" stroke="#68172a" stroke-width="1.5"/>
-            <!-- Center Knot -->
             <rect x="-9" y="-8" width="18" height="16" rx="5" fill="#7d2336" stroke="#5c1424" stroke-width="1.5"/>
           </g>
         </svg>
       </div>
 
-      <!-- Cursive Prompt -->
       <button
-        onclick="openEnvelopeTransition()"
+        onclick="goToScreen(6)"
         class="font-script text-3xl sm:text-5xl text-[#2d1419] mt-5 hover:text-[#7d2336] transition cursor-pointer"
       >
         Tap here to open
       </button>
 
-      <!-- Floral Line-Art Doodles in Bottom-Right -->
       <svg class="w-24 h-24 sm:w-32 sm:h-32 self-end mt-2 mr-4 text-[#4a2b31] opacity-80 pointer-events-none" viewBox="0 0 120 120">
         <path d="M25,110 Q45,70 40,40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         <path d="M70,110 Q65,75 80,50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <!-- Flower 1 -->
         <circle cx="40" cy="36" r="6" fill="#f3a6b8" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="31" cy="30" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="49" cy="30" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="33" cy="43" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="47" cy="43" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
-        <!-- Flower 2 -->
         <circle cx="82" cy="46" r="5" fill="#f3a6b8" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="74" cy="40" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="90" cy="40" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
@@ -625,26 +675,22 @@
   </section>
 
   <!-- ========================================================================
-       SCREEN 6: OPEN LOVE LETTER + PEEKING CAT + HEART PHOTO FRAMES
+       SCREEN 6: OPEN LOVE LETTER + PEEKING CAT + SYSTEM SYSTEM PHOTOS
        ======================================================================== -->
   <section id="screen-6" class="screen">
     <div class="relative max-w-2xl w-full flex flex-col items-center justify-center px-3">
-      
-      <!-- Open Pink Envelope Container -->
-      <div class="relative w-full max-w-md pt-10">
-        
+      <div class="relative w-full max-w-md pt-8">
         <!-- Open Envelope Top Flap Triangle -->
         <div class="w-full flex justify-center -mb-1">
-          <svg class="w-72 sm:w-80 h-20" viewBox="0 0 320 80">
+          <svg class="w-72 sm:w-80 h-16 sm:h-20" viewBox="0 0 320 80">
             <polygon points="10,80 160,6 310,80" fill="#eba1b2" stroke="#d88a9d" stroke-width="2"/>
           </svg>
         </div>
 
         <!-- Pink Envelope Pocket Body -->
-        <div class="relative bg-[#f4b6c4] border-2 border-[#e093a6] rounded-2xl shadow-xl pt-3 pb-8 px-4 sm:px-6 flex flex-col items-center">
-          
-          <!-- Peeking Cute Cat Sticker on Left Edge -->
-          <div class="sticker anim-float absolute -left-8 sm:-left-14 top-6 w-20 h-24 sm:w-24 sm:h-28 z-20 pointer-events-none">
+        <div class="relative bg-[#f4b6c4] border-2 border-[#e093a6] rounded-2xl shadow-xl pt-3 pb-6 px-4 sm:px-6 flex flex-col items-center">
+          <!-- Peeking Cute Cat Sticker -->
+          <div class="sticker anim-float absolute -left-7 sm:-left-14 top-6 w-20 h-24 sm:w-24 sm:h-28 z-20 pointer-events-none">
             <svg viewBox="0 0 130 150" class="w-full h-full">
               <path d="M35,45 L28,15 L56,32 Q72,28 88,32 L114,15 L107,45 Q120,65 115,92 Q110,118 72,120 Q34,118 29,92 Q24,65 35,45 Z" fill="#ffffff" stroke="#ffffff" stroke-width="10" stroke-linejoin="round"/>
               <path d="M37,46 L31,18 L57,34 Q72,30 87,34 L111,18 L105,46 Q117,65 112,90 Q107,114 72,116 Q37,114 32,90 Q27,65 37,46 Z" fill="#f7f4f2" stroke="#d6ccc6" stroke-width="2"/>
@@ -658,22 +704,21 @@
             </svg>
           </div>
 
-          <!-- Lined Note Card Rising Out of Envelope -->
+          <!-- Lined Note Card -->
           <div class="lined-paper relative w-11/12 sm:w-4/5 rounded-lg shadow-md border border-[#e6d5d8] p-4 sm:p-5 -mt-12 z-10 text-center">
-            <!-- Tiny Ribbon Tied at Top Left of Note -->
             <div class="absolute -top-3 left-3 text-lg">🎀</div>
-            <p class="font-clean font-medium text-xs sm:text-sm text-[#3d1d24] leading-[26px]">
+            <p id="love-letter-text" class="font-clean font-medium text-xs sm:text-sm text-[#3d1d24] leading-[26px]">
               You are seen, you are heard, and you are loved, no matter what. If you ever feel unloved, remember that my love for you is boundless and endless.
             </p>
           </div>
 
-          <!-- Double Heart-Shaped Photo Frames (Clickable to Upload Custom Photos!) -->
+          <!-- Double Heart-Shaped Photo Frames -->
           <div class="relative z-20 -mt-3 flex items-center justify-center gap-2 sm:gap-3">
             <!-- Heart Photo 1 -->
             <button
               onclick="triggerPhotoUpload('heart-img-1')"
-              title="Click to upload your own photo!"
-              class="group relative w-20 h-20 sm:w-24 sm:h-24 transition-transform hover:scale-110 focus:outline-none"
+              title="Click to upload your system photo!"
+              class="group relative w-20 h-20 sm:w-24 sm:h-24 transition-transform hover:scale-110 focus:outline-none cursor-pointer"
             >
               <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
                 <defs>
@@ -681,25 +726,17 @@
                     <path d="M50,88 C50,88 10,62 10,33 C10,18 22,8 35,8 C43,8 48,13 50,18 C52,13 57,8 65,8 C78,8 90,18 90,33 C90,62 50,88 50,88 Z"/>
                   </clipPath>
                 </defs>
-                <!-- White & Gold Heart Border -->
                 <path d="M50,91 C50,91 7,63 7,33 C7,16 20,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C80,5 93,16 93,33 C93,63 50,91 50,91 Z" fill="#ffffff" stroke="#d4a373" stroke-width="2.5"/>
-                <image
-                  id="heart-img-1"
-                  href="heart-photo-1.jpeg"
-                  width="100"
-                  height="100"
-                  preserveAspectRatio="xMidYMid slice"
-                  clip-path="url(#heartClip1)"
-                />
+                <image id="heart-img-1" href="heart-photo-1.jpeg" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#heartClip1)" onerror="handleImageError(this, 'heart-img-1')" />
               </svg>
-              <span class="absolute bottom-0 right-0 bg-[#7d2336] text-white text-[9px] px-1.5 py-0.5 rounded-full opacity-90 group-hover:scale-110">📷</span>
+              <span class="absolute bottom-0 right-0 bg-[#7d2336] text-white text-[9px] px-1.5 py-0.5 rounded-full opacity-90">📷</span>
             </button>
 
             <!-- Heart Photo 2 -->
             <button
               onclick="triggerPhotoUpload('heart-img-2')"
-              title="Click to upload your own photo!"
-              class="group relative w-20 h-20 sm:w-24 sm:h-24 transition-transform hover:scale-110 focus:outline-none"
+              title="Click to upload your system photo!"
+              class="group relative w-20 h-20 sm:w-24 sm:h-24 transition-transform hover:scale-110 focus:outline-none cursor-pointer"
             >
               <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
                 <defs>
@@ -708,29 +745,21 @@
                   </clipPath>
                 </defs>
                 <path d="M50,91 C50,91 7,63 7,33 C7,16 20,5 35,5 C43,5 48,10 50,15 C52,10 57,5 65,5 C80,5 93,16 93,33 C93,63 50,91 50,91 Z" fill="#ffffff" stroke="#d4a373" stroke-width="2.5"/>
-                <image
-                  id="heart-img-2"
-                  href="heart-photo-2.jpeg"
-                  width="100"
-                  height="100"
-                  preserveAspectRatio="xMidYMid slice"
-                  clip-path="url(#heartClip2)"
-                />
+                <image id="heart-img-2" href="heart-photo-2.jpeg" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#heartClip2)" onerror="handleImageError(this, 'heart-img-2')" />
               </svg>
-              <span class="absolute bottom-0 right-0 bg-[#7d2336] text-white text-[9px] px-1.5 py-0.5 rounded-full opacity-90 group-hover:scale-110">📷</span>
+              <span class="absolute bottom-0 right-0 bg-[#7d2336] text-white text-[9px] px-1.5 py-0.5 rounded-full opacity-90">📷</span>
             </button>
           </div>
-          <span class="text-[10px] text-[#7d2336]/75 font-semibold mt-1">(Tap hearts to customize photos)</span>
+          <span class="text-[10px] text-[#7d2336]/80 font-semibold mt-1">(Tap hearts to upload your system photos)</span>
         </div>
       </div>
 
       <!-- Bottom-Right Camera Icon + "Click here" Pill Button -->
-      <div class="mt-5 self-end sm:mr-6 flex flex-col items-center">
+      <div class="mt-4 self-end sm:mr-6 flex flex-col items-center">
         <button
           onclick="goToScreen(7)"
           class="group flex flex-col items-center focus:outline-none cursor-pointer"
         >
-          <!-- Cute Camera SVG Icon -->
           <div class="w-12 h-10 mb-1 transition-transform group-hover:-translate-y-1">
             <svg viewBox="0 0 64 52" class="w-full h-full drop-shadow">
               <rect x="6" y="12" width="52" height="34" rx="8" fill="#f7c5d0" stroke="#7d2336" stroke-width="2.5"/>
@@ -752,34 +781,24 @@
        SCREEN 7: BERRY/MAROON POLAROID GALLERY ("I LOVE YOU ❤️")
        ======================================================================== -->
   <section id="screen-7" class="screen berry-theme text-white">
-    <div class="relative w-full max-w-4xl h-full flex flex-col items-center justify-between py-4 sm:py-8 px-3">
-      
+    <div class="relative w-full max-w-4xl h-full flex flex-col items-center justify-between py-8 sm:py-10 px-3">
       <!-- Hanging String with Clothespins & 3 Polaroid Photo Frames -->
-      <div class="relative w-full pt-4 sm:pt-6">
-        <!-- Curved Clothesline String SVG -->
+      <div class="relative w-full pt-4">
         <svg class="w-full h-12 overflow-visible" viewBox="0 0 800 50" preserveAspectRatio="none">
           <path d="M0,10 Q400,55 800,10" fill="none" stroke="#f8d7df" stroke-width="2.5" opacity="0.85"/>
         </svg>
 
-        <!-- 3 Hanging Polaroid Cards -->
         <div class="grid grid-cols-3 gap-3 sm:gap-8 max-w-2xl mx-auto -mt-8 sm:-mt-7 px-1">
-          
           <!-- Polaroid 1 -->
           <div class="polaroid-1 relative flex flex-col items-center">
-            <!-- Wooden Clothespin -->
             <div class="w-3 h-7 bg-[#e5b887] border border-[#8f5d32] rounded-sm -mb-2 z-10 shadow"></div>
             <div
               onclick="triggerPhotoUpload('polaroid-img-1')"
-              title="Click to replace with your photo!"
+              title="Click to upload system photo!"
               class="polaroid-card cursor-pointer w-full aspect-[4/4.6] flex flex-col"
             >
               <div class="w-full h-4/5 overflow-hidden bg-pink-100 rounded-xs relative">
-                <img
-                  id="polaroid-img-1"
-                  src="polaroid-1.jpeg"
-                  alt="Memory 1"
-                  class="w-full h-full object-cover"
-                />
+                <img id="polaroid-img-1" src="polaroid-1.jpeg" alt="Memory 1" class="w-full h-full object-cover" onerror="handleImageError(this, 'polaroid-img-1')" />
               </div>
               <div class="flex-1 flex items-center justify-center pt-1">
                 <span class="text-[#e85d75] text-sm sm:text-base">🩷</span>
@@ -789,20 +808,14 @@
 
           <!-- Polaroid 2 -->
           <div class="polaroid-2 relative flex flex-col items-center mt-2">
-            <!-- Wooden Clothespin -->
             <div class="w-3 h-7 bg-[#e5b887] border border-[#8f5d32] rounded-sm -mb-2 z-10 shadow"></div>
             <div
               onclick="triggerPhotoUpload('polaroid-img-2')"
-              title="Click to replace with your photo!"
+              title="Click to upload system photo!"
               class="polaroid-card cursor-pointer w-full aspect-[4/4.6] flex flex-col"
             >
               <div class="w-full h-4/5 overflow-hidden bg-pink-100 rounded-xs relative">
-                <img
-                  id="polaroid-img-2"
-                  src="polaroid-2.jpeg"
-                  alt="Memory 2"
-                  class="w-full h-full object-cover"
-                />
+                <img id="polaroid-img-2" src="polaroid-2.jpeg" alt="Memory 2" class="w-full h-full object-cover" onerror="handleImageError(this, 'polaroid-img-2')" />
               </div>
               <div class="flex-1 flex items-center justify-center pt-1">
                 <span class="text-[#e85d75] text-sm sm:text-base">❤️</span>
@@ -812,77 +825,59 @@
 
           <!-- Polaroid 3 -->
           <div class="polaroid-3 relative flex flex-col items-center">
-            <!-- Wooden Clothespin -->
             <div class="w-3 h-7 bg-[#e5b887] border border-[#8f5d32] rounded-sm -mb-2 z-10 shadow"></div>
             <div
               onclick="triggerPhotoUpload('polaroid-img-3')"
-              title="Click to replace with your photo!"
+              title="Click to upload system photo!"
               class="polaroid-card cursor-pointer w-full aspect-[4/4.6] flex flex-col"
             >
               <div class="w-full h-4/5 overflow-hidden bg-pink-100 rounded-xs relative">
-                <img
-                  id="polaroid-img-3"
-                  src="polaroid-3.jpeg"
-                  alt="Memory 3"
-                  class="w-full h-full object-cover"
-                />
+                <img id="polaroid-img-3" src="polaroid-3.jpeg" alt="Memory 3" class="w-full h-full object-cover" onerror="handleImageError(this, 'polaroid-img-3')" />
               </div>
               <div class="flex-1 flex items-center justify-center pt-1">
                 <span class="text-[#e85d75] text-sm sm:text-base">🩷</span>
               </div>
             </div>
           </div>
-
         </div>
-        <p class="text-center text-[11px] text-pink-200/80 mt-2">
-          (Tap any Polaroid frame to upload your own photo)
+        <p class="text-center text-[11px] text-pink-200/85 mt-2">
+          (Tap any Polaroid frame to upload your system photos)
         </p>
       </div>
 
-      <!-- Center Typography: "I LOVE YOU ❤️" + Subtitle -->
+      <!-- Center Typography -->
       <div class="text-center my-auto px-2">
         <h2 class="font-impact text-4xl sm:text-6xl md:text-7xl tracking-wider text-[#ffd6e0] drop-shadow-md">
-          I LOVE YOU CUTIEPIEE<span class="text-3xl sm:text-5xl">❤️</span>
+          I LOVE YOU <span class="text-3xl sm:text-5xl">❤️</span>
         </h2>
         <p class="font-clean font-medium text-sm sm:text-lg md:text-xl text-pink-100 mt-1 tracking-wide">
           You don't know how much you mean to me
         </p>
       </div>
 
-      <!-- Bottom Row: Birthday Cake Line Art (Left) & Gift Box "Click here" Button (Right) -->
+      <!-- Bottom Row -->
       <div class="w-full flex items-end justify-between px-2 sm:px-6 pb-2">
-        <!-- Birthday Cake Line Art -->
-        <div class="w-20 h-20 sm:w-28 sm:h-28 opacity-90">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 opacity-90">
           <svg viewBox="0 0 120 120" class="w-full h-full">
-            <!-- Cake Base -->
             <rect x="20" y="68" width="80" height="36" rx="6" fill="none" stroke="#ffd6e0" stroke-width="2.5"/>
             <path d="M20,80 Q33,90 46,80 Q60,90 74,80 Q87,90 100,80" fill="none" stroke="#ffd6e0" stroke-width="2.2"/>
-            <!-- Top Tier -->
             <rect x="34" y="42" width="52" height="26" rx="5" fill="none" stroke="#ffd6e0" stroke-width="2.5"/>
-            <!-- Candles -->
             <line x1="48" y1="42" x2="48" y2="26" stroke="#ffd6e0" stroke-width="2.5"/>
             <line x1="60" y1="42" x2="60" y2="22" stroke="#ffd6e0" stroke-width="2.5"/>
             <line x1="72" y1="42" x2="72" y2="26" stroke="#ffd6e0" stroke-width="2.5"/>
-            <!-- Flames -->
             <circle cx="48" cy="21" r="3" fill="#ffd166"/>
             <circle cx="60" cy="17" r="3.5" fill="#ffd166"/>
             <circle cx="72" cy="21" r="3" fill="#ffd166"/>
           </svg>
         </div>
 
-        <!-- Gift Box Button -->
         <button
           onclick="goToScreen(8)"
           class="group flex flex-col items-center cursor-pointer focus:outline-none"
         >
-          <svg class="w-12 h-12 sm:w-14 sm:h-14 mb-1 transition-transform group-hover:scale-110" viewBox="0 0 64 64">
-            <rect x="12" y="26" width="40" height="30" rx="4" fill="none" stroke="#ffd6e0" stroke-width="2.5"/>
-            <rect x="8" y="18" width="48" height="8" rx="3" fill="none" stroke="#ffd6e0" stroke-width="2.5"/>
-            <line x1="32" y1="18" x2="32" y2="56" stroke="#ffd6e0" stroke-width="2.5"/>
-            <path d="M32,18 C22,6 14,14 24,18 M32,18 C42,6 50,14 40,18" fill="none" stroke="#ffd6e0" stroke-width="2.5"/>
-          </svg>
+          <span class="text-3xl sm:text-4xl mb-1 transition-transform group-hover:scale-110">🎂</span>
           <span class="bg-white text-[#8f2840] font-handwriting font-bold text-xl sm:text-2xl px-6 py-1 rounded-full shadow-lg group-hover:bg-pink-100 transition">
-            Click here
+            Make a Wish!
           </span>
         </button>
       </div>
@@ -890,47 +885,162 @@
   </section>
 
   <!-- ========================================================================
-       SCREEN 8: 3D PINK SURPRISE GIFT BOX ("Here's a surprise for you!!!")
+       SCREEN 8: INTERACTIVE MIC BLOW-OUT CAKE + CUT THE CAKE MINI-GAME
        ======================================================================== -->
   <section id="screen-8" class="screen">
-    <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-4">
+    <div class="relative max-w-xl w-full flex flex-col items-center text-center px-4">
       
-      <!-- Cursive Header -->
+      <h2 id="cake-title" class="font-script text-4xl sm:text-5xl text-[#2d1419] mb-1">
+        Make a Birthday Wish! ✨
+      </h2>
+      <p id="cake-subtitle" class="text-xs sm:text-sm font-bold text-[#7d2336]/85 mb-2">
+        Blow into your microphone 🌬️ or tap the button below to blow out the candles!
+      </p>
+
+      <!-- Live Microphone Volume Meter Pill -->
+      <div id="mic-meter-container" class="w-64 sm:w-72 bg-white/90 border border-[#7d2336]/30 rounded-full p-1.5 shadow-sm mb-3 flex items-center gap-2">
+        <span class="text-sm pl-1" id="mic-status-icon">🎙️</span>
+        <div class="flex-1 h-2.5 bg-pink-100 rounded-full overflow-hidden">
+          <div id="mic-volume-bar" class="h-full bg-gradient-to-r from-[#f3a6b8] to-[#7d2336] w-0 transition-all duration-75 rounded-full"></div>
+        </div>
+        <span class="text-[10px] font-bold text-[#7d2336] pr-1.5" id="mic-status-text">Blow 🌬️</span>
+      </div>
+
+      <!-- Interactive Strawberry Birthday Cake SVG -->
+      <div class="relative w-64 h-56 sm:w-72 sm:h-60 flex items-center justify-center">
+        <svg id="birthday-cake-svg" viewBox="0 0 260 220" class="w-full h-full drop-shadow-xl overflow-visible">
+          <!-- Cake Plate -->
+          <ellipse cx="130" cy="196" rx="105" ry="16" fill="#ffffff" stroke="#d8c3c8" stroke-width="2.5"/>
+          <ellipse cx="130" cy="193" rx="88" ry="11" fill="#fceef2"/>
+
+          <!-- Left Half of Cake -->
+          <g id="cake-left-half" style="transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
+            <path d="M55,130 L130,130 L130,188 L65,188 Q55,188 55,178 Z" fill="#f7b2c4" stroke="#c95b78" stroke-width="2"/>
+            <rect x="56" y="156" width="74" height="7" fill="#fff8fa"/>
+            <path d="M72,88 L130,88 L130,130 L72,130 Z" fill="#ffd1dc" stroke="#c95b78" stroke-width="2"/>
+            <path d="M72,88 L130,88 L130,104 Q120,114 112,102 Q102,116 92,102 Q82,114 72,102 Z" fill="#ffffff"/>
+            <circle cx="88" cy="84" r="7" fill="#e63956"/>
+            <path d="M85,78 L88,81 L91,78" stroke="#4a7c59" stroke-width="2" fill="none"/>
+          </g>
+
+          <!-- Right Half of Cake -->
+          <g id="cake-right-half" style="transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
+            <path d="M130,130 L205,130 L205,178 Q205,188 195,188 L130,188 Z" fill="#f7b2c4" stroke="#c95b78" stroke-width="2"/>
+            <rect x="130" y="156" width="74" height="7" fill="#fff8fa"/>
+            <path d="M130,88 L188,88 L188,130 L130,130 Z" fill="#ffd1dc" stroke="#c95b78" stroke-width="2"/>
+            <path d="M130,88 L188,88 L188,102 Q178,114 168,102 Q158,116 148,102 Q138,114 130,104 Z" fill="#ffffff"/>
+            <circle cx="172" cy="84" r="7" fill="#e63956"/>
+            <path d="M169,78 L172,81 L175,78" stroke="#4a7c59" stroke-width="2" fill="none"/>
+          </g>
+
+          <!-- 3 Candles -->
+          <g id="candles-group">
+            <g id="candle-1">
+              <rect x="97" y="54" width="8" height="34" rx="3" fill="#fff3b0" stroke="#d4a373" stroke-width="1.5"/>
+              <path id="flame-1" class="candle-flame" d="M101,34 Q108,45 101,53 Q94,45 101,34 Z" fill="#ff9f1c"/>
+              <circle id="smoke-1" cx="101" cy="44" r="4" fill="#cbd5e1" opacity="0"/>
+            </g>
+            <g id="candle-2">
+              <rect x="126" y="48" width="8" height="40" rx="3" fill="#bde0fe" stroke="#5c8ab8" stroke-width="1.5"/>
+              <path id="flame-2" class="candle-flame" d="M130,27 Q138,39 130,47 Q122,39 130,27 Z" fill="#ff7b00"/>
+              <circle id="smoke-2" cx="130" cy="38" r="4" fill="#cbd5e1" opacity="0"/>
+            </g>
+            <g id="candle-3">
+              <rect x="155" y="54" width="8" height="34" rx="3" fill="#ffc8dd" stroke="#c95b78" stroke-width="1.5"/>
+              <path id="flame-3" class="candle-flame" d="M159,34 Q166,45 159,53 Q152,45 159,34 Z" fill="#ff9f1c"/>
+              <circle id="smoke-3" cx="159" cy="44" r="4" fill="#cbd5e1" opacity="0"/>
+            </g>
+          </g>
+
+          <!-- Cake Knife -->
+          <g id="cake-knife" class="hidden cursor-pointer" onclick="sliceTheCake()" transform="translate(155, 22) rotate(-28)">
+            <rect x="0" y="0" width="58" height="10" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="58" y="-2" width="26" height="14" rx="5" fill="#8e2740" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="15" y="-6" font-size="11" fill="#7d2336" font-weight="bold">✨ Tap to Slice!</text>
+          </g>
+        </svg>
+
+        <!-- Wish Card -->
+        <div id="cake-wish-reveal" class="hidden absolute inset-x-4 top-12 bg-white/95 border-2 border-[#7d2336] rounded-2xl p-3.5 shadow-xl text-center z-30">
+          <p class="font-script text-2xl sm:text-3xl text-[#7d2336]">Wish Granted! 🎂🩷</p>
+          <p class="text-xs font-semibold text-[#3d1d24] mt-1">May every single dream in your heart come true this year, my love!</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-3 flex flex-wrap items-center justify-center gap-3">
+        <button id="btn-blow-fallback" onclick="blowOutAllCandles()" class="btn-maroon font-handwriting text-2xl sm:text-3xl px-8 py-2 rounded-full">
+          Tap to Blow 💨
+        </button>
+        <button id="btn-slice-cake" onclick="sliceTheCake()" class="hidden btn-maroon font-handwriting text-2xl sm:text-3xl px-8 py-2 rounded-full">
+          Cut the Cake 🔪✨
+        </button>
+        <button id="btn-cake-next" onclick="goToScreen(9)" class="hidden btn-maroon font-handwriting text-2xl sm:text-3xl px-9 py-2 rounded-full">
+          Open Love Coupons 🎟️
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SCREEN 9: LOVE COUPONS
+       ======================================================================== -->
+  <section id="screen-9" class="screen">
+    <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-3">
+      <h2 class="font-script text-4xl sm:text-5xl text-[#2d1419] mb-1">
+        Birthday Love Coupons 🎟️
+      </h2>
+      <p class="text-xs sm:text-sm font-bold text-[#7d2336]/80 mb-5">
+        Tap each ticket to reveal your special birthday treats!
+      </p>
+
+      <div class="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg">
+        <div onclick="revealCoupon(this, '☕ 1 Free Coffee & Pastry Date — Anytime You Crave!')" class="coupon-card cursor-pointer rounded-2xl p-4 sm:p-5 shadow-md flex flex-col items-center justify-center min-h-[115px]">
+          <span class="text-2xl sm:text-3xl mb-1">💌</span>
+          <span class="font-handwriting text-xl sm:text-2xl font-bold">Tap to Reveal #1</span>
+        </div>
+        <div onclick="revealCoupon(this, '🤗 Unlimited Warm Hugs & Forehead Kisses Forever')" class="coupon-card cursor-pointer rounded-2xl p-4 sm:p-5 shadow-md flex flex-col items-center justify-center min-h-[115px]">
+          <span class="text-2xl sm:text-3xl mb-1">🎀</span>
+          <span class="font-handwriting text-xl sm:text-2xl font-bold">Tap to Reveal #2</span>
+        </div>
+        <div onclick="revealCoupon(this, '🌙 Late Night Long Drive + Your Favorite Playlist')" class="coupon-card cursor-pointer rounded-2xl p-4 sm:p-5 shadow-md flex flex-col items-center justify-center min-h-[115px]">
+          <span class="text-2xl sm:text-3xl mb-1">✨</span>
+          <span class="font-handwriting text-xl sm:text-2xl font-bold">Tap to Reveal #3</span>
+        </div>
+        <div onclick="revealCoupon(this, '🍰 Your Favorite Dessert Delivered Straight to You')" class="coupon-card cursor-pointer rounded-2xl p-4 sm:p-5 shadow-md flex flex-col items-center justify-center min-h-[115px]">
+          <span class="text-2xl sm:text-3xl mb-1">🩷</span>
+          <span class="font-handwriting text-xl sm:text-2xl font-bold">Tap to Reveal #4</span>
+        </div>
+      </div>
+
+      <button onclick="goToScreen(10)" class="mt-6 btn-maroon font-handwriting text-2xl sm:text-3xl px-10 py-2 rounded-full">
+        One Last Surprise 🎁
+      </button>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SCREEN 10: 3D GIFT BOX
+       ======================================================================== -->
+  <section id="screen-10" class="screen">
+    <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-4">
       <h2 class="font-script text-4xl sm:text-6xl text-[#2d1419] mb-4 sm:mb-6">
         Here's a surprise for you!!!
       </h2>
 
-      <!-- Center 3D-Styled Pink Gift Box + "Tap here" Hand-Drawn Arrow -->
       <div class="relative flex items-center justify-center my-2">
-        <button
-          onclick="triggerFinalSurprise()"
-          class="anim-gift cursor-pointer focus:outline-none group relative w-44 h-44 sm:w-56 sm:h-56"
-          aria-label="Open Surprise Gift Box"
-        >
+        <button onclick="triggerFinalSurprise()" class="anim-gift cursor-pointer focus:outline-none group relative w-44 h-44 sm:w-56 sm:h-56">
           <svg viewBox="0 0 220 220" class="w-full h-full drop-shadow-2xl">
-            <!-- Ground Shadow -->
             <ellipse cx="110" cy="196" rx="74" ry="12" fill="rgba(125,35,54,0.16)"/>
-
-            <!-- Box Front-Left Face (3D Isometric) -->
             <polygon points="45,92 110,118 110,192 45,164" fill="#e598ab" stroke="#c9748a" stroke-width="1.5"/>
-            <!-- Box Front-Right Face -->
             <polygon points="175,92 110,118 110,192 175,164" fill="#d88298" stroke="#be677e" stroke-width="1.5"/>
-
-            <!-- Vertical Satin Ribbons on Box Body -->
             <polygon points="71,103 85,108 85,181 71,175" fill="#9e324b"/>
             <polygon points="135,108 149,103 149,175 135,181" fill="#822237"/>
-
-            <!-- Box Lid Left & Right -->
             <polygon points="38,74 110,102 110,122 38,94" fill="#f2b2c2" stroke="#d48398" stroke-width="1.5"/>
             <polygon points="182,74 110,102 110,122 182,94" fill="#e89cb0" stroke="#c9748a" stroke-width="1.5"/>
-            <!-- Box Lid Top Diamond -->
             <polygon points="110,48 182,74 110,102 38,74" fill="#f9ccd7" stroke="#e093a6" stroke-width="1.5"/>
-
-            <!-- Lid Ribbons -->
             <polygon points="72,61 86,56 150,81 136,87" fill="#9e324b"/>
             <polygon points="134,56 148,61 84,87 70,81" fill="#822237"/>
-
-            <!-- Big Satin Bow on Top -->
             <g transform="translate(110, 68)">
               <path d="M-4,4 L-38,24 L-26,30 L0,8 Z" fill="#7d2336"/>
               <path d="M4,4 L38,24 L26,30 L0,8 Z" fill="#7d2336"/>
@@ -941,264 +1051,114 @@
           </svg>
         </button>
 
-        <!-- Hand-Drawn Arrow + "Tap here" Label on Right -->
-        <div
-          onclick="triggerFinalSurprise()"
-          class="cursor-pointer flex flex-col items-start -ml-2 sm:ml-2 mt-14 sm:mt-20 select-none"
-        >
+        <div onclick="triggerFinalSurprise()" class="cursor-pointer flex flex-col items-start -ml-2 sm:ml-2 mt-14 sm:mt-20 select-none">
           <svg class="w-12 h-10 sm:w-16 sm:h-12 text-[#5c232f]" viewBox="0 0 70 50">
             <path d="M55,38 Q28,36 10,14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
             <path d="M10,14 L22,15 M10,14 L12,26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
-          <span class="font-handwriting text-2xl sm:text-3xl text-[#4a1c26] -mt-2 ml-4">
-            Tap here
-          </span>
+          <span class="font-handwriting text-2xl sm:text-3xl text-[#4a1c26] -mt-2 ml-4">Tap here</span>
         </div>
-      </div>
-
-      <!-- Cute Party-Hat Puppy Sticker on Bottom-Right -->
-      <div class="sticker anim-float self-end mr-2 sm:mr-8 -mt-2 w-24 h-28 sm:w-32 sm:h-36 pointer-events-none">
-        <svg viewBox="0 0 150 170" class="w-full h-full">
-          <path d="M75,12 L92,46 Q116,54 122,82 Q128,112 114,142 Q96,154 75,154 Q54,154 36,142 Q22,112 28,82 Q34,54 58,46 Z" fill="#ffffff" stroke="#ffffff" stroke-width="10" stroke-linejoin="round"/>
-          <!-- Party Hat -->
-          <polygon points="75,15 58,48 92,48" fill="#a8dadc" stroke="#457b9d" stroke-width="2"/>
-          <circle cx="75" cy="13" r="5" fill="#f497b2"/>
-          <!-- Fluffy Puppy Head -->
-          <ellipse cx="75" cy="82" rx="36" ry="32" fill="#efe6dd" stroke="#cbbba8" stroke-width="2"/>
-          <!-- Floppy Ears -->
-          <ellipse cx="38" cy="84" rx="11" ry="22" transform="rotate(14 38 84)" fill="#d6c3b0" stroke="#b59e88" stroke-width="2"/>
-          <ellipse cx="112" cy="84" rx="11" ry="22" transform="rotate(-14 112 84)" fill="#d6c3b0" stroke="#b59e88" stroke-width="2"/>
-          <!-- Eyes & Nose -->
-          <circle cx="62" cy="78" r="5.5" fill="#2b1e16"/>
-          <circle cx="88" cy="78" r="5.5" fill="#2b1e16"/>
-          <ellipse cx="75" cy="88" rx="6" ry="4.5" fill="#3d2b22"/>
-          <path d="M68,95 Q75,102 82,95" fill="none" stroke="#3d2b22" stroke-width="2" stroke-linecap="round"/>
-          <!-- Little Pink Collar -->
-          <rect x="54" y="112" width="42" height="8" rx="4" fill="#f285a2"/>
-        </svg>
       </div>
     </div>
   </section>
 
   <!-- ========================================================================
-       SCREEN 9: FINAL VIRTUAL HUG + FLOWER BOUQUET + REPLAY
+       SCREEN 11: VIRTUAL HUG, KISSES & FLOWER SHOWER
        ======================================================================== -->
-  <section id="screen-9" class="screen">
-    <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-4">
-      
-      <!-- Cursive Header -->
-      <h2 class="font-script text-4xl sm:text-6xl text-[#2d1419] mb-4 sm:mb-6">
+  <section id="screen-11" class="screen">
+    <div class="relative max-w-2xl w-full flex flex-col items-center text-center px-3">
+      <h2 class="font-script text-4xl sm:text-6xl text-[#2d1419] mb-2 sm:mb-4">
         Here is virtual hug for you
       </h2>
 
-      <!-- Animated Cute Milk & Mocha Style Bears Hugging + Floating Hearts -->
-      <div class="relative w-64 h-52 sm:w-80 sm:h-60 flex items-center justify-center my-1">
-        
-        <!-- Floating Hearts Above Hugging Bears -->
-        <span class="heart-float-1 absolute top-2 left-1/3 text-2xl sm:text-3xl">🩷</span>
+      <div id="hugging-bears-box" class="relative w-60 h-44 sm:w-72 sm:h-52 flex items-center justify-center my-1 transition-transform duration-300">
+        <span class="heart-float-1 absolute top-1 left-1/3 text-2xl sm:text-3xl">🩷</span>
         <span class="heart-float-2 absolute top-0 left-1/2 text-xl sm:text-2xl">❤️</span>
-        <span class="heart-float-3 absolute top-4 right-1/3 text-2xl sm:text-3xl">💕</span>
+        <span class="heart-float-3 absolute top-3 right-1/3 text-2xl sm:text-3xl">💋</span>
 
         <svg viewBox="0 0 280 210" class="w-full h-full drop-shadow-lg">
-          <!-- Ground Shadow -->
           <ellipse cx="140" cy="192" rx="95" ry="12" fill="rgba(125,35,54,0.14)"/>
-
-          <!-- LEFT BEAR (White "Milk" Bear) -->
           <g class="hug-left">
-            <!-- Ears -->
             <circle cx="76" cy="54" r="14" fill="#ffffff" stroke="#5c4338" stroke-width="3"/>
             <circle cx="124" cy="54" r="14" fill="#ffffff" stroke="#5c4338" stroke-width="3"/>
-            <!-- Body -->
             <path d="M68,118 Q62,184 82,186 L124,186 Q134,155 128,118 Z" fill="#ffffff" stroke="#5c4338" stroke-width="3"/>
-            <!-- Head -->
             <ellipse cx="100" cy="86" rx="38" ry="33" fill="#ffffff" stroke="#5c4338" stroke-width="3"/>
-            <!-- Happy Closed Eye & Blush -->
             <path d="M84,84 Q90,78 96,84" fill="none" stroke="#5c4338" stroke-width="2.8" stroke-linecap="round"/>
             <ellipse cx="78" cy="93" rx="7" ry="4" fill="#f7a8b8" opacity="0.8"/>
-            <!-- Hugging Arm Wrapping Around Brown Bear -->
             <path d="M116,124 Q158,120 164,136 Q166,148 122,146" fill="#ffffff" stroke="#5c4338" stroke-width="3" stroke-linecap="round"/>
           </g>
-
-          <!-- RIGHT BEAR (Brown "Mocha" Bear) -->
           <g class="hug-right">
-            <!-- Ears -->
             <circle cx="156" cy="54" r="14" fill="#9c6b4e" stroke="#4a3123" stroke-width="3"/>
             <circle cx="204" cy="54" r="14" fill="#9c6b4e" stroke="#4a3123" stroke-width="3"/>
-            <!-- Body -->
             <path d="M152,118 Q146,155 156,186 L198,186 Q218,184 212,118 Z" fill="#9c6b4e" stroke="#4a3123" stroke-width="3"/>
-            <!-- Head -->
             <ellipse cx="180" cy="86" rx="38" ry="33" fill="#9c6b4e" stroke="#4a3123" stroke-width="3"/>
-            <!-- Happy Closed Eye & Blush -->
             <path d="M184,84 Q190,78 196,84" fill="none" stroke="#4a3123" stroke-width="2.8" stroke-linecap="round"/>
             <ellipse cx="202" cy="93" rx="7" ry="4" fill="#f48fb1" opacity="0.75"/>
-            <!-- Hugging Arm Wrapping Around White Bear -->
             <path d="M164,134 Q122,130 116,145 Q114,156 158,154" fill="#9c6b4e" stroke="#4a3123" stroke-width="3" stroke-linecap="round"/>
           </g>
         </svg>
       </div>
 
-      <!-- Bottom Row: Replay Button (Left) & Wrapped Flower Bouquet with "HAPPY BIRTHDAY" Tag (Right) -->
-      <div class="w-full flex items-end justify-between px-2 sm:px-8 mt-2">
-        <button
-          onclick="goToScreen(1)"
-          class="bg-white/90 hover:bg-white text-[#7d2336] border-2 border-[#7d2336]/30 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full shadow-sm transition flex items-center gap-1.5 cursor-pointer"
-        >
-          <span>↻</span> Replay Surprise
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 my-2">
+        <button onclick="launchShower('hug')" class="btn-maroon font-handwriting text-lg sm:text-xl px-4 sm:px-5 py-1.5 rounded-full">
+          Send Big Hug 🤗
         </button>
+        <button onclick="launchShower('kiss')" class="btn-maroon font-handwriting text-lg sm:text-xl px-4 sm:px-5 py-1.5 rounded-full">
+          Shower with Kisses 💋
+        </button>
+        <button onclick="launchShower('flower')" class="btn-maroon font-handwriting text-lg sm:text-xl px-4 sm:px-5 py-1.5 rounded-full">
+          Flower Shower 🌸
+        </button>
+      </div>
 
-        <!-- Wrapped Flower Bouquet Sticker -->
-        <div class="sticker anim-float w-28 h-28 sm:w-36 sm:h-36 pointer-events-none">
-          <svg viewBox="0 0 160 160" class="w-full h-full">
-            <!-- Kraft Paper Cone Wrap -->
-            <polygon points="32,68 128,68 86,148 74,148" fill="#e6be9a" stroke="#b58963" stroke-width="2"/>
-            <!-- Green Leaves -->
-            <ellipse cx="48" cy="58" rx="14" ry="8" transform="rotate(-30 48 58)" fill="#6a994e"/>
-            <ellipse cx="112" cy="58" rx="14" ry="8" transform="rotate(30 112 58)" fill="#6a994e"/>
-            <ellipse cx="80" cy="42" rx="10" ry="16" fill="#588157"/>
-            <!-- Roses / Tulips -->
-            <circle cx="58" cy="56" r="14" fill="#f28482"/>
-            <circle cx="102" cy="56" r="14" fill="#f28482"/>
-            <circle cx="80" cy="48" r="16" fill="#ff758f"/>
-            <circle cx="68" cy="68" r="13" fill="#ffb3c1"/>
-            <circle cx="92" cy="68" r="13" fill="#ffb3c1"/>
-            <!-- Ribbon Bow on Wrap -->
-            <circle cx="80" cy="112" r="6" fill="#7d2336"/>
-            <path d="M80,112 L64,104 L64,120 Z M80,112 L96,104 L96,120 Z" fill="#9e324b"/>
-            <!-- Cute "HAPPY BIRTHDAY" Tag -->
-            <g transform="translate(86, 76) rotate(12)">
-              <rect x="0" y="0" width="54" height="24" rx="4" fill="#fffdf9" stroke="#7d2336" stroke-width="1.5"/>
-              <text x="27" y="10" font-size="6.5" font-weight="bold" text-anchor="middle" fill="#7d2336">HAPPY</text>
-              <text x="27" y="19" font-size="6.5" font-weight="bold" text-anchor="middle" fill="#7d2336">BIRTHDAY</text>
-            </g>
-          </svg>
-        </div>
+      <div class="w-full flex items-end justify-between px-2 sm:px-8 mt-1">
+        <button onclick="goToScreen(1)" class="bg-white/90 hover:bg-white text-[#7d2336] border-2 border-[#7d2336]/30 font-semibold text-xs sm:text-sm px-4 py-2 rounded-full shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+          <span>↻</span> Replay
+        </button>
       </div>
     </div>
   </section>
 
   <!-- ========================================================================
-       INTERACTIVE JAVASCRIPT ENGINE
+       JAVASCRIPT ENGINE
        ======================================================================== -->
   <script>
     let currentScreen = 1;
-    let soundEnabled = true;
     let activeImageTargetId = null;
+    let noDodgeCount = 0;
 
-    // Web Audio API Soft Cute Chime (Self-contained, no external audio files)
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    let audioCtx = null;
-
-    function playPopChime(freq = 587.33, duration = 0.16) {
-      if (!soundEnabled) return;
-      try {
-        if (!audioCtx) audioCtx = new AudioCtx();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq * 1.25, audioCtx.currentTime + duration);
-
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {
-        // Ignore audio errors if blocked by browser autoplay policy
-      }
-    }
-
-    function toggleChime() {
-      soundEnabled = !soundEnabled;
-      document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
-      document.getElementById('sound-label').textContent = soundEnabled ? 'Sound On' : 'Muted';
-      if (soundEnabled) playPopChime(660, 0.15);
-    }
-
-    // Navigate smoothly between the 9 screens
-    function goToScreen(screenNum) {
-      playPopChime(screenNum === 2 ? 320 : 620, 0.16);
-
-      const prevEl = document.getElementById(`screen-${currentScreen}`);
-      const nextEl = document.getElementById(`screen-${screenNum}`);
-
-      if (prevEl) prevEl.classList.remove('active');
-      if (nextEl) nextEl.classList.add('active');
-
-      currentScreen = screenNum;
-
-      // Toggle Cream Grid vs Berry Theme (Screen 7 uses full berry background)
-      const cornerWaves = document.getElementById('corner-waves');
-      if (screenNum === 7) {
-        document.body.classList.remove('graph-paper');
-        document.body.classList.add('berry-theme');
-        cornerWaves.style.opacity = '0';
-      } else {
-        document.body.classList.remove('berry-theme');
-        document.body.classList.add('graph-paper');
-        cornerWaves.style.opacity = '1';
-      }
-
-      // Trigger typewriter effect on Screen 4
-      if (screenNum === 4) {
-        runTypewriter();
-      }
-    }
-
-    // Typewriter animation for Screen 4
-    function runTypewriter() {
-      const target = document.getElementById('bday-typewriter');
-      const line1 = "YOU ARE MY FAVORITE NOTIFICATION ❤️";
-      const line2 = "STAY CUTE. STAY HAPPY. STAY MINE.";
-      target.innerHTML = "";
-      let i = 0;
-
-      function typeStep() {
-        if (i < line1.length) {
-          target.innerHTML += line1.charAt(i);
-          i++;
-          setTimeout(typeStep, 28);
-        } else if (i === line1.length) {
-          target.innerHTML += "<br/>";
-          i++;
-          setTimeout(typeStep, 120);
-        } else if (i - line1.length - 1 < line2.length) {
-          target.innerHTML += line2.charAt(i - line1.length - 1);
-          i++;
-          setTimeout(typeStep, 28);
+    // Load saved system image paths / filenames from localStorage
+    function loadSavedData() {
+      const photoKeys = ['heart-img-1', 'heart-img-2', 'polaroid-img-1', 'polaroid-img-2', 'polaroid-img-3'];
+      photoKeys.forEach((id) => {
+        const saved = localStorage.getItem('bday_sys_photo_' + id);
+        if (saved) {
+          applyImageSource(id, saved);
         }
-      }
-      typeStep();
-    }
+      });
 
-    // Envelope opening transition (Screen 5 -> Screen 6)
-    function openEnvelopeTransition() {
-      playPopChime(740, 0.22);
-      goToScreen(6);
-    }
-
-    // Final Surprise Box Opening + Confetti Burst (Screen 8 -> Screen 9)
-    function triggerFinalSurprise() {
-      playPopChime(880, 0.28);
-      goToScreen(9);
-
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 75,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#7d2336', '#f3a6b8', '#ff758f', '#ffd166', '#ffffff']
-        });
+      const savedLetter = localStorage.getItem('bday_custom_letter');
+      if (savedLetter) {
+        document.getElementById('love-letter-text').textContent = savedLetter;
       }
     }
 
-    // Custom Photo Upload Handler for Heart Frames (Screen 6) & Polaroids (Screen 7)
+    function applyImageSource(elementId, src) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      if (el.tagName.toLowerCase() === 'image') {
+        el.setAttribute('href', src);
+      } else {
+        el.src = src;
+      }
+    }
+
+    function handleImageError(imgEl, elementId) {
+      // Fallback placeholder if local file is missing
+      imgEl.src = "https://placehold.co/300x400/f3a6b8/7d2336?text=Add+Photo";
+    }
+
     const fileInput = document.getElementById('photo-uploader');
-
     function triggerPhotoUpload(targetElementId) {
       activeImageTargetId = targetElementId;
       fileInput.value = '';
@@ -1211,29 +1171,352 @@
 
       const reader = new FileReader();
       reader.onload = function (e) {
-        const targetEl = document.getElementById(activeImageTargetId);
-        if (!targetEl) return;
-
-        // Support both SVG <image> (href) and HTML <img> (src)
-        if (targetEl.tagName.toLowerCase() === 'image') {
-          targetEl.setAttribute('href', e.target.result);
-        } else {
-          targetEl.src = e.target.result;
-        }
-        showToast('Photo updated! Looking adorable 🩷');
-        playPopChime(780, 0.18);
+        localStorage.setItem('bday_sys_photo_' + activeImageTargetId, e.target.result);
+        applyImageSource(activeImageTargetId, e.target.result);
+        showToast('System photo loaded successfully! 🩷');
+        playPopChime(700, 0.15);
       };
       reader.readAsDataURL(file);
     });
+
+    function openCustomizeModal() {
+      document.getElementById('custom-letter-input').value =
+        document.getElementById('love-letter-text').textContent.trim();
+
+      const photoKeys = ['heart-img-1', 'heart-img-2', 'polaroid-img-1', 'polaroid-img-2', 'polaroid-img-3'];
+      photoKeys.forEach((id) => {
+        const inputEl = document.getElementById('sys-' + id);
+        const saved = localStorage.getItem('bday_sys_photo_' + id);
+        if (inputEl) {
+          inputEl.value = saved && !saved.startsWith('data:') ? saved : '';
+        }
+      });
+
+      const modal = document.getElementById('customize-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeCustomizeModal() {
+      const modal = document.getElementById('customize-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveSystemFilenames() {
+      const text = document.getElementById('custom-letter-input').value.trim();
+      if (text) {
+        localStorage.setItem('bday_custom_letter', text);
+        document.getElementById('love-letter-text').textContent = text;
+      }
+
+      const photoKeys = ['heart-img-1', 'heart-img-2', 'polaroid-img-1', 'polaroid-img-2', 'polaroid-img-3'];
+      photoKeys.forEach((id) => {
+        const inputEl = document.getElementById('sys-' + id);
+        if (inputEl && inputEl.value.trim() !== '') {
+          const val = inputEl.value.trim();
+          localStorage.setItem('bday_sys_photo_' + id, val);
+          applyImageSource(id, val);
+        }
+      });
+
+      showToast('Photos updated successfully! 🩷');
+      closeCustomizeModal();
+    }
+
+    function resetAllSavedPhotos() {
+      const photoKeys = ['heart-img-1', 'heart-img-2', 'polaroid-img-1', 'polaroid-img-2', 'polaroid-img-3'];
+      photoKeys.forEach((id) => {
+        localStorage.removeItem('bday_sys_photo_' + id);
+      });
+      localStorage.removeItem('bday_custom_letter');
+      location.reload();
+    }
+
+    // Audio Chimes & Music Box
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let musicPlaying = false;
+    let musicTimer = null;
+
+    function ensureAudioCtx() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playPopChime(freq = 600, duration = 0.16) {
+      try {
+        ensureAudioCtx();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    const LULLABY_NOTES = [
+      { f: 392, d: 320 }, { f: 392, d: 220 }, { f: 440, d: 520 }, { f: 392, d: 520 }, { f: 523.25, d: 520 }, { f: 493.88, d: 900 },
+      { f: 392, d: 320 }, { f: 392, d: 220 }, { f: 440, d: 520 }, { f: 392, d: 520 }, { f: 587.33, d: 520 }, { f: 523.25, d: 900 }
+    ];
+    let noteIndex = 0;
+
+    function playMusicBoxNote(freq) {
+      if (!musicPlaying) return;
+      try {
+        ensureAudioCtx();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0008, audioCtx.currentTime + 0.85);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.85);
+      } catch (e) {}
+    }
+
+    function scheduleNextMusicNote() {
+      if (!musicPlaying) return;
+      const item = LULLABY_NOTES[noteIndex % LULLABY_NOTES.length];
+      playMusicBoxNote(item.f);
+      noteIndex++;
+      musicTimer = setTimeout(scheduleNextMusicNote, item.d);
+    }
+
+    function toggleMusicBox(forceStart = false) {
+      if (forceStart && musicPlaying) return;
+      musicPlaying = forceStart ? true : !musicPlaying;
+      document.getElementById('music-icon').textContent = musicPlaying ? '🎶' : '🎵';
+      document.getElementById('music-label').textContent = musicPlaying ? 'Music: On' : 'Music: Off';
+      clearTimeout(musicTimer);
+      if (musicPlaying) {
+        ensureAudioCtx();
+        scheduleNextMusicNote();
+      }
+    }
+
+    // Navigation
+    function goToScreen(screenNum) {
+      playPopChime(screenNum === 2 ? 320 : 620, 0.16);
+      if (currentScreen === 8 && screenNum !== 8) stopMicrophoneBlowDetector();
+
+      const prevEl = document.getElementById(`screen-${currentScreen}`);
+      const nextEl = document.getElementById(`screen-${screenNum}`);
+      if (prevEl) prevEl.classList.remove('active');
+      if (nextEl) nextEl.classList.add('active');
+      currentScreen = screenNum;
+
+      const cornerWaves = document.getElementById('corner-waves');
+      if (screenNum === 7) {
+        document.body.classList.remove('graph-paper');
+        document.body.classList.add('berry-theme');
+        cornerWaves.style.opacity = '0';
+      } else {
+        document.body.classList.remove('berry-theme');
+        document.body.classList.add('graph-paper');
+        cornerWaves.style.opacity = '1';
+      }
+
+      if (screenNum === 4) runTypewriter();
+      if (screenNum === 8) initCakeScreen();
+    }
+
+    function handleYesStart() {
+      toggleMusicBox(true);
+      goToScreen(3);
+    }
+
+    function dodgeNoButton() {
+      const noBtn = document.getElementById('no-btn');
+      const hint = document.getElementById('no-hint');
+      if (noDodgeCount < 3) {
+        const rx = (Math.random() > 0.5 ? 1 : -1) * (55 + Math.random() * 65);
+        const ry = (Math.random() > 0.5 ? 1 : -1) * (25 + Math.random() * 35);
+        noBtn.style.transform = `translate(${rx}px, ${ry}px)`;
+        noDodgeCount++;
+        hint.textContent = ["Hehe too slow! 😜", "Are you sureee? 🥺", "Click it if you dare!"][noDodgeCount - 1];
+        playPopChime(440, 0.12);
+      }
+    }
+
+    function handleNoClick() {
+      if (noDodgeCount < 3) { dodgeNoButton(); return; }
+      noDodgeCount = 0;
+      document.getElementById('no-btn').style.transform = 'translate(0, 0)';
+      document.getElementById('no-hint').textContent = '';
+      goToScreen(2);
+    }
+
+    function runTypewriter() {
+      const target = document.getElementById('bday-typewriter');
+      const line1 = "YOU ARE MY FAVORITE NOTIFICATION ❤️";
+      const line2 = "STAY CUTE. STAY HAPPY. STAY MINE.";
+      target.innerHTML = "";
+      let i = 0;
+      function typeStep() {
+        if (i < line1.length) { target.innerHTML += line1.charAt(i); i++; setTimeout(typeStep, 26); }
+        else if (i === line1.length) { target.innerHTML += "<br/>"; i++; setTimeout(typeStep, 110); }
+        else if (i - line1.length - 1 < line2.length) { target.innerHTML += line2.charAt(i - line1.length - 1); i++; setTimeout(typeStep, 26); }
+      }
+      typeStep();
+    }
+
+    // Cake & Mic Blow
+    let micStream = null;
+    let micAnimFrame = null;
+    let candlesBlown = [false, false, false];
+    let cakeSliced = false;
+
+    function initCakeScreen() {
+      candlesBlown = [false, false, false];
+      cakeSliced = false;
+      [1, 2, 3].forEach((n) => {
+        const f = document.getElementById(`flame-${n}`);
+        const s = document.getElementById(`smoke-${n}`);
+        f.style.opacity = '1';
+        s.classList.remove('smoke-puff');
+        s.style.opacity = '0';
+      });
+      document.getElementById('candles-group').style.opacity = '1';
+      document.getElementById('cake-left-half').style.transform = 'translateX(0)';
+      document.getElementById('cake-right-half').style.transform = 'translateX(0)';
+      document.getElementById('cake-knife').classList.add('hidden');
+      document.getElementById('cake-wish-reveal').classList.add('hidden');
+      document.getElementById('btn-blow-fallback').classList.remove('hidden');
+      document.getElementById('btn-slice-cake').classList.add('hidden');
+      document.getElementById('btn-cake-next').classList.add('hidden');
+      document.getElementById('mic-meter-container').classList.remove('hidden');
+      startMicrophoneBlowDetector();
+    }
+
+    async function startMicrophoneBlowDetector() {
+      try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        ensureAudioCtx();
+        const source = audioCtx.createMediaStreamSource(micStream);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        function checkBlowLevel() {
+          if (currentScreen !== 8 || candlesBlown.every(Boolean)) return;
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+          const avg = sum / dataArray.length;
+          document.getElementById('mic-volume-bar').style.width = Math.min(100, Math.round((avg / 65) * 100)) + '%';
+          if (avg > 34) {
+            const nextIdx = candlesBlown.findIndex((b) => !b);
+            if (nextIdx !== -1) extinguishSingleCandle(nextIdx + 1);
+          }
+          micAnimFrame = requestAnimationFrame(checkBlowLevel);
+        }
+        checkBlowLevel();
+      } catch (err) {}
+    }
+
+    function stopMicrophoneBlowDetector() {
+      if (micAnimFrame) cancelAnimationFrame(micAnimFrame);
+      if (micStream) { micStream.getTracks().forEach((t) => t.stop()); micStream = null; }
+    }
+
+    function extinguishSingleCandle(candleNum) {
+      if (candlesBlown[candleNum - 1]) return;
+      candlesBlown[candleNum - 1] = true;
+      document.getElementById(`flame-${candleNum}`).style.opacity = '0';
+      const smoke = document.getElementById(`smoke-${candleNum}`);
+      smoke.style.opacity = '0.9';
+      smoke.classList.add('smoke-puff');
+      playPopChime(500 + candleNum * 80, 0.14);
+      if (candlesBlown.every(Boolean)) onAllCandlesOut();
+    }
+
+    function blowOutAllCandles() {
+      [1, 2, 3].forEach((num, idx) => setTimeout(() => extinguishSingleCandle(num), idx * 180));
+    }
+
+    function onAllCandlesOut() {
+      stopMicrophoneBlowDetector();
+      if (typeof confetti === 'function') confetti({ particleCount: 65, spread: 65, origin: { y: 0.55 } });
+      document.getElementById('mic-meter-container').classList.add('hidden');
+      document.getElementById('btn-blow-fallback').classList.add('hidden');
+      document.getElementById('cake-knife').classList.remove('hidden');
+      document.getElementById('btn-slice-cake').classList.remove('hidden');
+    }
+
+    function sliceTheCake() {
+      if (cakeSliced) return;
+      cakeSliced = true;
+      playPopChime(880, 0.2);
+      document.getElementById('cake-knife').classList.add('hidden');
+      document.getElementById('candles-group').style.opacity = '0';
+      document.getElementById('cake-left-half').style.transform = 'translateX(-28px) rotate(-3deg)';
+      document.getElementById('cake-right-half').style.transform = 'translateX(28px) rotate(3deg)';
+      setTimeout(() => {
+        document.getElementById('cake-wish-reveal').classList.remove('hidden');
+        document.getElementById('btn-slice-cake').classList.add('hidden');
+        document.getElementById('btn-cake-next').classList.remove('hidden');
+      }, 350);
+    }
+
+    function revealCoupon(cardEl, text) {
+      if (cardEl.classList.contains('revealed')) return;
+      cardEl.classList.add('revealed');
+      cardEl.innerHTML = `<p class="font-clean font-bold text-xs sm:text-sm leading-snug">${text}</p>`;
+      playPopChime(750, 0.15);
+    }
+
+    function triggerFinalSurprise() {
+      playPopChime(920, 0.22);
+      goToScreen(11);
+      if (typeof confetti === 'function') confetti({ particleCount: 90, spread: 75, origin: { y: 0.6 } });
+    }
+
+    function launchShower(type) {
+      playPopChime(650, 0.18);
+      const layer = document.getElementById('shower-layer');
+      const bears = document.getElementById('hugging-bears-box');
+      bears.style.transform = 'scale(1.1)';
+      setTimeout(() => (bears.style.transform = 'scale(1)'), 260);
+
+      const emojiSets = {
+        hug: ['🤗', '🩷', '❤️', '🧸', '💕'],
+        kiss: ['💋', '😘', '🩷', '💖', '💕'],
+        flower: ['🌸', '🌷', '🌹', '💐', '🌺']
+      };
+      const pool = emojiSets[type] || emojiSets.hug;
+
+      for (let i = 0; i < 18; i++) {
+        const span = document.createElement('span');
+        span.textContent = pool[Math.floor(Math.random() * pool.length)];
+        span.style.position = 'absolute';
+        span.style.left = Math.random() * 92 + 4 + 'vw';
+        span.style.bottom = '-30px';
+        span.style.fontSize = 22 + Math.random() * 18 + 'px';
+        span.style.animation = `showerRise ${1.8 + Math.random() * 1.2}s ease-out ${Math.random() * 0.4}s forwards`;
+        layer.appendChild(span);
+        setTimeout(() => span.remove(), 3400);
+      }
+    }
 
     function showToast(message) {
       const toast = document.getElementById('toast-msg');
       toast.textContent = message;
       toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2400);
+      setTimeout(() => toast.classList.remove('show'), 2400);
     }
+
+    window.addEventListener('DOMContentLoaded', loadSavedData);
   </script>
 </body>
 </html>
